@@ -8,7 +8,7 @@ module.exports = {
     },
     module: {
         rules: [{
-            test: /.jsx?$/,
+            test: /(\.jsx|\.js)$/,
             exclude: /node_modules/,
             use: {
                 loader: 'babel-loader'
@@ -16,15 +16,7 @@ module.exports = {
         },
             {
                 test: /\.css$/,
-                include: /node_modules/,
-                use: [
-                    {
-                        loader: 'style-loader'
-                    },
-                    {
-                        loader: 'css-loader'
-                    }
-                ]
+                loader: "style-loader!css-loader"
             },
             {
                 test: /^((?!\.global).)*\.css$/,
@@ -45,16 +37,14 @@ module.exports = {
                 ]
             },
             {
-                test: /\.less$/,
-                use: [{
-                    loader: 'file-loader',
-                    options: {
-                        name: 'theme.css'
-                    }
-                },{
-                    loader: 'less-loader',
-                    options: { javascriptEnabled: true }// compiles Less to CSS
-                }]
+                test: /.*\.less$/,
+                use: [
+                    {loader: "style-loader"},
+                    {loader: "css-loader"},
+                    {
+                        loader: 'less-loader',
+                        options: {javascriptEnabled: true}// compiles Less to CSS
+                    }]
             },
         ]
     }

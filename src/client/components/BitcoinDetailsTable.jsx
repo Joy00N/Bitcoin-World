@@ -1,7 +1,6 @@
 import React from 'react';
 import {Table, Row, Col} from 'antd';
 import Layout from 'antd/lib/layout';
-import Header from 'antd/lib/layout';
 import Content from 'antd/lib/layout';
 import autoBind from 'react-autobind';
 
@@ -20,7 +19,7 @@ export default class BitcoinDetailsTable extends React.Component {
                 key: 'bitcoin'
             },
             {
-                title: 'Balance',
+                title: 'USD Balance',
                 dataIndex: 'balance',
                 key: 'balance'
             },
@@ -54,7 +53,6 @@ export default class BitcoinDetailsTable extends React.Component {
 
         return (
             <Layout>
-                <Header><h1>React Ant Design Demo</h1></Header>
                 <Content>
                     <Table
                         columns={columns}

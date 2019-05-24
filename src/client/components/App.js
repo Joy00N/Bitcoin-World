@@ -13,11 +13,10 @@ class App extends React.Component {
     render() {
         return (
             <div className="container-fluid">
-                <h1>Hi, it is {this.state.date.toLocaleDateString()}</h1>
+                <h1>Hi, it is {this.state.date.toLocaleTimeString()}</h1>
                 <BitcoinDetails/>
             </div>
         );
     }
 }
-
 export default App;
