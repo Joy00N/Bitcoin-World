@@ -8,20 +8,16 @@ export default class BitcoinDetailsTable extends React.Component {
     constructor(props, context) {
         super(props, context);
 
-        autoBind(this);
-    }
-
-    render() {
-        let columns = [
+        this.columns = [
             {
-                title: 'Bitcoin',
+                title: 'Bitcoin Balance',
                 dataIndex: 'bitcoin',
                 key: 'bitcoin'
             },
             {
                 title: 'USD Balance',
-                dataIndex: 'balance',
-                key: 'balance'
+                dataIndex: 'usd',
+                key: 'usd'
             },
             {
                 title: 'Current Exchange Rate',
@@ -30,33 +26,34 @@ export default class BitcoinDetailsTable extends React.Component {
             }
         ];
 
-        const dataSource = [
-            {
-                key: '1',
-                bitcoin: 'MSFT',
-                balance: 10,
-                currentExchangeRate: 1.0
-            },
-            {
-                key: '2',
-                bitcoin: 'AAPL',
-                balance: 20,
-                currentExchangeRate: 2.0
-            },
-            {
-                key: '3',
-                bitcoin: 'SPX',
-                balance: 30,
-                currentExchangeRate: 3.0
-            }
-        ];
+        this.state = {
+            dataSource: [
+                {
+                    key: '1',
+                    bitcoin: 10,
+                    usd: 1000,
+                    currentExchangeRate: 1.0
+                }
+                ], count: 1,
+        };
+
+        autoBind(this);
+    }
+
+    handleUpdate = () => {
+        const dataSource = [...this.state.dataSource];
+        this.setState({dataSource: dataSource})
+    }
+
+    render() {
 
         return (
             <Layout>
                 <Content>
                     <Table
-                        columns={columns}
-                        dataSource={dataSource}
+                        columns={this.columns}
+                        dataSource={this.state.dataSource}
+                        bordered={true}
                     />
                 </Content>
             </Layout>

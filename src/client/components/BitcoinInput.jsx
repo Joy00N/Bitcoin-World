@@ -22,7 +22,7 @@ export default class TemperatureInput extends React.Component {
             <div className="container">
                 <form>
                     <div className= "form-group">
-                        <lable><h3>Enter Temperature in {scaleNames[scale]}: </h3></lable>
+                        <lable><h3>Enter Value in {scaleNames[scale]}: </h3></lable>
                         <input className="form-control container text-center" id="focusedInputed" type="text" value={value}
                                onChange={this.handleChange} />
                     </div>
