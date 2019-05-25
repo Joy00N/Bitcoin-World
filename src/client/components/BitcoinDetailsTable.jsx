@@ -5,8 +5,8 @@ import Content from 'antd/lib/layout';
 import autoBind from 'react-autobind';
 
 export default class BitcoinDetailsTable extends React.Component {
-    constructor(props, context) {
-        super(props, context);
+    constructor(props) {
+        super(props);
 
         this.columns = [
             {
@@ -27,22 +27,32 @@ export default class BitcoinDetailsTable extends React.Component {
         ];
 
         this.state = {
+            coins: this.props.coins,
             dataSource: [
                 {
                     key: '1',
-                    bitcoin: 10,
-                    usd: 1000,
-                    currentExchangeRate: 1.0
-                }
-                ], count: 1,
+                    bitcoin: this.props.coins.bitcoin,
+                    usd: this.props.coins.usd,
+                    currentExchangeRate: this.props.coins.currentExchangeRate
+                }], count: 1,
         };
 
         autoBind(this);
     }
 
-    handleUpdate = () => {
-        const dataSource = [...this.state.dataSource];
-        this.setState({dataSource: dataSource})
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.coins !== this.props.coins) {
+            this.setState({
+                coins: nextProps.coins,
+                dataSource: [
+                    {
+                        key: '1',
+                        bitcoin: nextProps.coins.bitcoin,
+                        usd: nextProps.coins.usd,
+                        currentExchangeRate: nextProps.coins.currentExchangeRate
+                    }], count: 1,
+            });
+        }
     }
 
     render() {

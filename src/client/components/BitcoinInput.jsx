@@ -5,7 +5,7 @@ const scaleNames = {
     f: 'USD'
 };
 
-export default class TemperatureInput extends React.Component {
+export default class BitcoinInput extends React.Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);

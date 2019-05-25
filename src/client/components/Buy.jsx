@@ -26,7 +26,7 @@ export default class Buy extends React.Component {
         return (
             <Layout>
                 <Content>
-                    <RequestForm/>
+                    {/*<RequestForm/>*/}
 
                 </Content>
             </Layout>
