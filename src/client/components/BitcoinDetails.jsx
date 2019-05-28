@@ -1,7 +1,7 @@
 import React from 'react';
 
 import RequestForm from './RequestForm.jsx';
-import {Statistic, Col, Row, Button, Form} from 'antd';
+import {Statistic, Col, Row, Button, Form, Switch, Radio} from 'antd';
 import BitcoinDetailsTable from './BitcoinDetailsTable.jsx';
 import autoBind from 'react-autobind';
 import {connect} from 'react-redux';
@@ -10,7 +10,7 @@ import Calculator from './Calculator.jsx';
 
 
 const WrappedRequestArea = Form.create()(RequestForm);
-
+const RadioGroup = Radio.Group;
 
 class BitcoinDetails extends React.Component {
     constructor(props) {
@@ -23,9 +23,12 @@ class BitcoinDetails extends React.Component {
                 stopPrice: ""
             },
             coins: [],
-            currentExchangeRate: "8025.26"
+            currentExchangeRate: "8025.26",
+                isToggleOn: true,
+                radioValue: 1,
         };
 
+        this.handleClick = this.handleClick.bind(this);
         autoBind(this);
     }
 
@@ -38,6 +41,18 @@ class BitcoinDetails extends React.Component {
             this.setState({coins: nextProps.coins});
         }
     }
+
+    handleClick() {
+        this.setState(state => ({
+            isToggleOn: !state.isToggleOn
+        }));
+    }
+
+    onRadioChange = e => {
+        this.setState({
+            radioValue: e.target.value,
+        });
+    };
 
     handleChange(e) {
         console.log(e);
@@ -71,11 +86,33 @@ class BitcoinDetails extends React.Component {
                         <Statistic title="Bitcoin Current Exchange Rate" value={this.state.currentExchangeRate}
                                    precision={2}/>
                         <Button style={{marginTop: 16}} type="primary">
-                            Recharge
+                            Refresh
                         </Button>
                     </Col>
                     <Col span={6}>
                         <Calculator/>
+                    </Col>
+                </Row>
+
+
+                <Row gutter={36}>
+                    <Col>
+                        <Switch checkedChildren="Buy"
+                                checked={this.state.isToggleOn}
+                                unCheckedChildren="Sell"
+                                defaultChecked={true}
+                                onChange={this.handleClick}
+                        />
+                    </Col>
+                </Row>
+
+                <Row gutter={50}>
+                    <Col>
+                        <RadioGroup onChange={this.onRadioChange} value={this.state.radioValue}>
+                            <Radio value={1}>Market Order</Radio>
+                            <Radio value={2}>Limit Order</Radio>
+                            <Radio value={3}>Stop Order</Radio>
+                        </RadioGroup>
                     </Col>
                 </Row>
 
