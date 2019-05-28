@@ -1,6 +1,6 @@
-const todos = (state = [], action) => {
+const records = (state = [], action) => {
     switch (action.type) {
-        case 'ADD_TODO':
+        case 'ADD_RECORD':
             return [
                 ...state,
                 {
@@ -9,13 +9,9 @@ const todos = (state = [], action) => {
                     completed: false
                 }
             ]
-        case 'TOGGLE_TODO':
-            return state.map(todo =>
-                todo.id === action.id ? { ...todo, completed: !todo.completed } : todo
-            )
         default:
             return state
     }
 }
 
-export default todos
+export default records

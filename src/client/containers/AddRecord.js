@@ -1,13 +1,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {addTodo} from '../actions'
+import {addRecord} from '../actions'
 import {Input, Form, Row, Col, Switch, Button} from 'antd';
-
-
 
 const FormItem = Form.Item;
 
-const AddTodo = ({dispatch}) => {
+const AddRecord = ({dispatch}) => {
     let input1, input2, input3, input4;
 
     return (
@@ -16,10 +14,10 @@ const AddTodo = ({dispatch}) => {
                 onSubmit={e => {
                     e.preventDefault();
 
-                    dispatch(addTodo(input1.props.name, input1.state.value));
-                    dispatch(addTodo(input2.props.name, input2.state.value));
-                    dispatch(addTodo(input3.props.name, input3.state.value));
-                    dispatch(addTodo(input4.props.name, input4.state.value));
+                    dispatch(addRecord(input1.props.name, input1.state.value));
+                    dispatch(addRecord(input2.props.name, input2.state.value));
+                    dispatch(addRecord(input3.props.name, input3.state.value));
+                    dispatch(addRecord(input4.props.name, input4.state.value));
 
                     input1.state.value = '';
                     input2.state.value = '';
@@ -57,10 +55,16 @@ const AddTodo = ({dispatch}) => {
                     </Col>
                 </Row>
 
-                <button type="submit">Add Todo</button>
+                <Row gutter={50}>
+
+                    <Col span={24}>
+                        <Button className="submit-button" id="submit-button" type="primary"
+                                htmlType="submit">Submit</Button>
+                    </Col>
+                </Row>
             </Form>
         </div>
     )
 }
 
-export default connect()(AddTodo)
+export default connect()(AddRecord)

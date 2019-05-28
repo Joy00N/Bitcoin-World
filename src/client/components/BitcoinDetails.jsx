@@ -1,15 +1,13 @@
 import React from 'react';
 
-import RequestForm from './RequestForm.jsx';
 import {Statistic, Col, Row, Button, Form, Switch, Radio} from 'antd';
 import BitcoinDetailsTable from './BitcoinDetailsTable.jsx';
 import autoBind from 'react-autobind';
 import {connect} from 'react-redux';
-import {calculator} from '../actions';
 import Calculator from './Calculator.jsx';
+import AddRecord from "../containers/AddRecord.js";
+import RecordList from "./RecordList";
 
-
-const WrappedRequestArea = Form.create()(RequestForm);
 const RadioGroup = Radio.Group;
 
 class BitcoinDetails extends React.Component {
@@ -23,10 +21,12 @@ class BitcoinDetails extends React.Component {
                 stopPrice: ""
             },
             coins: [],
-            currentExchangeRate: "8025.26",
+            currentExchangeRate: 8025.26,
                 isToggleOn: true,
                 radioValue: 1,
         };
+
+        this.state.recordList = RecordList;
 
         this.handleClick = this.handleClick.bind(this);
         autoBind(this);
@@ -55,9 +55,7 @@ class BitcoinDetails extends React.Component {
     };
 
     handleChange(e) {
-        console.log(e);
         const {name, value} = e.target;
-        console.log(e.target);
         this.setState(prevState => ({
             post: {...prevState.post, [name]: value}
         }));
@@ -78,6 +76,12 @@ class BitcoinDetails extends React.Component {
         });
     };
 
+    handleRefresh(){
+        let max = 8020.00;
+        let min = 8040.02;
+        this.setState({currentExchangeRate: Math.floor(Math.random()*(max-min+1)+min)});
+    }
+
     render() {
         return (
             <div className="App">
@@ -85,12 +89,13 @@ class BitcoinDetails extends React.Component {
                     <Col span={6}>
                         <Statistic title="Bitcoin Current Exchange Rate" value={this.state.currentExchangeRate}
                                    precision={2}/>
-                        <Button style={{marginTop: 16}} type="primary">
+                        <Button style={{marginTop: 16}} type="primary" onClick={this.handleRefresh}>
                             Refresh
                         </Button>
                     </Col>
                     <Col span={6}>
-                        <Calculator/>
+                        <Calculator
+                            currentExchangeRate={this.state.currentExchangeRate}/>
                     </Col>
                 </Row>
 
@@ -118,18 +123,14 @@ class BitcoinDetails extends React.Component {
 
                 <Row>
                     <Col>
-                        <WrappedRequestArea
-                            handleChange={this.handleChange}
-                            post={this.state.post}
-                            handleSubmit={this.handleSubmit}
-                        />
+                        <AddRecord/>
                     </Col>
                 </Row>
 
                 <Row>
                     <Col>
                         <BitcoinDetailsTable
-                            coins={this.state.coins}
+                            coins={this.state.records}
                         />
                     </Col>
                 </Row>

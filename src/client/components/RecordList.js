@@ -1,17 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Todo from './Todo'
+import Record from './Record'
 
-const TodoList = ({ todos }) => (
+const RecordList = ({ records }) => (
     <ul>
-        {todos.map(todo => (
-            <Todo key={todo.id} {...todo} />
+        {records.map(record => (
+            <Record key={record.id} {...record} />
         ))}
     </ul>
 )
 
-TodoList.propTypes = {
-    todos: PropTypes.arrayOf(
+RecordList.propTypes = {
+    records: PropTypes.arrayOf(
         PropTypes.shape({
             id: PropTypes.number.isRequired,
             completed: PropTypes.bool.isRequired,
@@ -21,4 +21,4 @@ TodoList.propTypes = {
     ).isRequired
 }
 
-export default TodoList
+export default RecordList

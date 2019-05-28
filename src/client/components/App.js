@@ -1,8 +1,7 @@
 import React from 'react';
 import BitcoinDetails from './BitcoinDetails.jsx';
 import 'bootstrap/dist/css/bootstrap.css'
-import AddTodo from "../containers/AddTodo";
-import VisibleTodoList from "../containers/VisibleTodoList";
+import VisibleRecordList from "../containers/VisibleRecordList";
 
 class App extends React.Component {
     constructor(props) {
@@ -27,8 +26,7 @@ class App extends React.Component {
             <div className="container-fluid">
                 <h1>Hi, it is {this.state.time.toLocaleTimeString()}</h1>
                 <BitcoinDetails/>
-                <AddTodo/>
-                <VisibleTodoList/>
+                <VisibleRecordList/>
             </div>
         );
     }
