@@ -1,22 +1,16 @@
-import React from 'react';
-import BitcoinDetails from './BitcoinDetails.jsx';
-import 'bootstrap/dist/css/bootstrap.css'
+import React from 'react'
+import Footer from './Footer'
+import AddTodo from '../containers/AddTodo'
+import VisibleTodoList from '../containers/VisibleTodoList'
+import BitcoinDetails from "./BitcoinDetails.jsx";
 
-class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            date: new Date()
-        };
-    }
+const App = () => (
+    <div>
+        <BitcoinDetails/>
+        <AddTodo />
+        <VisibleTodoList />
+        <Footer />
+    </div>
+)
 
-    render() {
-        return (
-            <div className="container-fluid">
-                <h1>Hi, it is {this.state.date.toLocaleTimeString()}</h1>
-                <BitcoinDetails/>
-            </div>
-        );
-    }
-}
-export default App;
+export default App

@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from 'antd/lib/layout';
 import Content from 'antd/lib/layout';
 import autoBind from 'react-autobind';
-import RequestForm from "./RequestForm.jsx";
+import RequestForm from './RequestForm.jsx';
 
 
 export default class Buy extends React.Component {

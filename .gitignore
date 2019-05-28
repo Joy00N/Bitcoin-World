@@ -27,3 +27,5 @@ yarn-error.log*
 
 src/package-lock.json
 .gitignore
+
+/src/client/bundle.js

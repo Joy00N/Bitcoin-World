@@ -1,8 +1,9 @@
 import React from 'react';
 import {Table, Row, Col} from 'antd';
 import Layout from 'antd/lib/layout';
-import Content from 'antd/lib/layout';
 import autoBind from 'react-autobind';
+
+const { Header, Content} = Layout;
 
 export default class BitcoinDetailsTable extends React.Component {
     constructor(props) {
@@ -20,9 +21,14 @@ export default class BitcoinDetailsTable extends React.Component {
                 key: 'usd'
             },
             {
-                title: 'Current Exchange Rate',
-                dataIndex: 'currentExchangeRate',
-                key: 'currentExchangeRate'
+                title: 'Limit Price',
+                dataIndex: 'limitPrice',
+                key: 'limitPrice'
+            },
+            {
+                title: 'Stop Price',
+                dataIndex: 'stopPrice',
+                key: 'stopPrice'
             }
         ];
 
@@ -31,17 +37,17 @@ export default class BitcoinDetailsTable extends React.Component {
             dataSource: [
                 {
                     key: '1',
-                    bitcoin: this.props.coins.bitcoin,
-                    usd: this.props.coins.usd,
-                    currentExchangeRate: this.props.coins.currentExchangeRate
+                    bitcoin: 10,
+                    usd: 1000,
+                    limitPrice: 1,
+                    stopPrice: 1,
                 }], count: 1,
         };
-
         autoBind(this);
     }
 
     componentWillReceiveProps(nextProps) {
-        if(nextProps.coins !== this.props.coins) {
+        if (nextProps.coins !== this.props.coins) {
             this.setState({
                 coins: nextProps.coins,
                 dataSource: [
@@ -49,7 +55,8 @@ export default class BitcoinDetailsTable extends React.Component {
                         key: '1',
                         bitcoin: nextProps.coins.bitcoin,
                         usd: nextProps.coins.usd,
-                        currentExchangeRate: nextProps.coins.currentExchangeRate
+                        limitPrice: nextProps.coins.limitPrice,
+                        stopPrice: nextProps.coins.stopPrice
                     }], count: 1,
             });
         }
@@ -59,13 +66,14 @@ export default class BitcoinDetailsTable extends React.Component {
 
         return (
             <Layout>
-                <Content>
-                    <Table
-                        columns={this.columns}
-                        dataSource={this.state.dataSource}
-                        bordered={true}
-                    />
-                </Content>
+                <Header style={{ background: '#fff', padding: 0 }} />
+                    <Content>
+                        <Table
+                            columns={this.columns}
+                            dataSource={this.state.dataSource}
+                            bordered={true}
+                        />
+                    </Content>
             </Layout>
         )
     }

@@ -1,12 +1,12 @@
 import React from 'react';
 import BitcoinInput from './BitcoinInput.jsx';
 
-function toCelsius(fahrenheit) {
-    return (fahrenheit - 32) * 5 / 9;
+function toUSD(bitcoin) {
+    return bitcoin / 8025.26;
 }
 
-function toFahrenheit(celsius) {
-    return (celsius * 9 / 5) + 32;
+function toBitcoin(usd) {
+    return usd * 8025.26;
 }
 
 function tryConvert(value, convert) {
@@ -22,35 +22,36 @@ function tryConvert(value, convert) {
 export default class Calculator extends React.Component {
     constructor(props) {
         super(props);
-        this.handleCelsiusChange = this.handleCelsiusChange.bind(this);
-        this.handleFahrenheitChange = this.handleFahrenheitChange.bind(this);
+        this.handleUSDChange = this.handleUSDChange.bind(this);
+        this.handleBitcoinChange = this.handleBitcoinChange.bind(this);
         this.state = {value: '', scale: 'c'};
     }
 
-    handleCelsiusChange(value) {
+    handleUSDChange(value) {
         this.setState({scale: 'c', value});
+
     }
 
-    handleFahrenheitChange(value) {
+    handleBitcoinChange(value) {
         this.setState({scale: 'f', value});
     }
 
     render() {
         const scale = this.state.scale;
         const value = this.state.value;
-        const celsius = scale === 'f' ? tryConvert(value, toCelsius) : value;
-        const fahrenheit = scale === 'c' ? tryConvert(value, toFahrenheit) : value;
+        const usd = scale === 'f' ? tryConvert(value, toUSD) : value;
+        const bitcoin = scale === 'c' ? tryConvert(value, toBitcoin) : value;
 
         return (
             <div className="text-center container-fluid">
                 <BitcoinInput
                     scale="c"
-                    value={celsius}
-                    onChange={this.handleCelsiusChange} />
+                    value={usd}
+                    onChange={this.handleUSDChange} />
                 <BitcoinInput
                     scale="f"
-                    value={fahrenheit}
-                    onChange={this.handleFahrenheitChange} />
+                    value={bitcoin}
+                    onChange={this.handleBitcoinChange} />
             </div>
         );
     }
