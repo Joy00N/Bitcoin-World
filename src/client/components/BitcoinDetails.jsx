@@ -87,7 +87,7 @@ class BitcoinDetails extends React.Component {
             <div className="App">
                 <Row>
                     <Col span={6}>
-                        <Statistic title="Bitcoin Current Exchange Rate" value={this.state.currentExchangeRate}
+                        <Statistic title="Current Bitcoin Exchange Rate" value={this.state.currentExchangeRate}
                                    precision={2}/>
                         <Button style={{marginTop: 16}} type="primary" onClick={this.handleRefresh}>
                             Refresh
