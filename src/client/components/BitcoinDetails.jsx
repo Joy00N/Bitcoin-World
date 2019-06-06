@@ -61,9 +61,8 @@ class BitcoinDetails extends React.Component {
         }));
     }
 
-    handleSubmit(e) {
-        e.preventDefault();
-
+    handleSubmit() {
+        alert('hey!');
         this.setState(prevState => ({
             coins: [prevState.post],
             post: {bitcoin: "", usd: "", limitPrice: "", stopPrice: ""}
@@ -123,7 +122,7 @@ class BitcoinDetails extends React.Component {
 
                 <Row>
                     <Col>
-                        <AddRecord/>
+                        <AddRecord callback={this.handleSubmit}/>
                     </Col>
                 </Row>
 

@@ -58,8 +58,7 @@ const AddRecord = ({dispatch}) => {
                 <Row gutter={50}>
 
                     <Col span={24}>
-                        <Button className="submit-button" id="submit-button" type="primary"
-                                htmlType="submit">Submit</Button>
+                        <Button className="submit-button" id="submit-button" type="primary" >Submit</Button>
                     </Col>
                 </Row>
             </Form>
